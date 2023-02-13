@@ -1,0 +1,14 @@
+h1{
+  text-align: center;
+}
+
+#map_container{
+  display: flex;
+  justify-content: center;
+}
+
+#map{
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px gray;
+}
