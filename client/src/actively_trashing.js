@@ -14,6 +14,10 @@ class ActivelyTrashing extends Drawable{
     this._ctx.lineWidth = 2
     this._ctx.strokeStyle = "red"
     this._ctx.stroke()
+  }
 
+  set_pos(x, y){
+    this.x += x
+    this.y += y
   }
 }

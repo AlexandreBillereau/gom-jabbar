@@ -3,6 +3,7 @@ class Canvas{
   constructor(canvas, width, height){
     canvas.width     = width
     canvas.height    = height
+    this.drawable    = new Array()
     this._ctx        = canvas.getContext("2d");
     this._background = new Background(...BACKGROUND_POS, this._ctx)
     this.origin      = new Origin(...ORIGIN_POS)
@@ -13,7 +14,11 @@ class Canvas{
   async draw(){
     let background_image = this._background.create(BACKGROUND_IMAGE_PATH)
     await this._background.draw(background_image)
-    this.circle.draw()
+    this.drawable.forEach(obj => {
+      obj.draw()
+    });
+
+
   }
 
   init_events(canvas){
@@ -48,12 +53,19 @@ class Canvas{
 
     }
 
+    //test function
+    canvas.onclick = (_with) => {
+      console.log("yata")
+      this.drawable.push(new ActivelyTrashing(_with.offsetX, _with.offsetY, this._ctx))
+      this.draw()
+
+    }
+
   }
 
   set_pos(x,y) {//to-do : loop
     this._background.set_pos(x, y)
   }
-
 
 
 

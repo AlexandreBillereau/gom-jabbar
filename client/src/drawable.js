@@ -12,4 +12,8 @@ class Drawable{
   position_form_origin(){
     throw "this function need to be overwrite"
   }
+
+  set_pos(x,y){
+    throw "this function need to be overwrite"
+  }
 }
