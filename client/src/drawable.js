@@ -17,4 +17,13 @@ class Drawable{
     this.x += x
     this.y += y
   }
+
+  get_posX_from_origin(origin){
+    return origin.x - this.x
+  }
+
+  get_posY_from_origin(origin){
+    return origin.y - this.y    
+  }
+
 }
