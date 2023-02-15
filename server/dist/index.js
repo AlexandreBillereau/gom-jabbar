@@ -13,20 +13,35 @@ const port = 8080;
 const validator = new jsonschema_1.default.Validator();
 ;
 // temporary solution
-const dataBase = [];
+const tableSignal = [];
 app.use((0, helmet_1.default)());
 app.use(body_parser_1.default.json());
 app.get("/", (req, res) => {
-    res.send(dataBase);
+    res.send(tableSignal);
 });
 app.post("/signal", (req, res) => {
     const result = validator.validate(req.body, signal_1.signalOfHumanSchema);
     if (!result.valid) {
+        console.log("yata");
         res.send(result.errors);
+        console.log("yat");
+        return;
     }
-    res.send("yata");
-    dataBase.push(req.body);
-    console.log(dataBase);
+    tableSignal.push(req.body);
+});
+app.get("/presence", (req, res) => {
+    const result = validator.validate(req.body, signal_1.humainSignaled);
+    if (!result.valid) {
+        res.send(result.errors);
+        console.log("error");
+        return;
+    }
+    console.log(result.instance);
+    const instance = result.instance;
+    const positions = tableSignal.filter(el => {
+        return el.lat === instance.lat && el.lng === instance.lng;
+    });
+    res.json({ result: positions.length === 0 });
 });
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);

@@ -9,3 +9,12 @@ export const signalOfHumanSchema: {} =  {
   },
   "required": ["lng", "lat", "trash_level", "excitement_level"]
 }
+
+export const humainSignaled: {} = {
+  "type": "object",
+  "properties":{
+    lng : {type : "number", required : true},
+    lat: {type : "number", required : true},
+  },
+  "required": ["lng", "lat"]
+}

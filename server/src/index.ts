@@ -2,7 +2,7 @@ import express    from "express"
 import helmet     from "helmet"
 import bodyParser from "body-parser"
 import Validator  from "jsonschema"
-import {signalOfHumanSchema} from "./model/signal"
+import {signalOfHumanSchema, humainSignaled} from "./model/signal"
 
 const app  = express()
 const port = 8080
@@ -25,9 +25,28 @@ app.post("/signal", (req, res) => {
 
   if(!result.valid){
     res.send(result.errors)
+    return
   }
-  res.send("yata")
+
   tableSignal.push(req.body)
+  res.send("ok")
+})
+
+app.get("/presence", (req, res) => {
+  const result = validator.validate(req.body, humainSignaled)
+  if(!result.valid){
+    res.send(result.errors)
+    return
+  }
+
+  const instance = result.instance
+  const positions = tableSignal.filter( el => {
+    return el.lat === instance.lat && 
+           el.lng === instance.lng
+  })
+
+  res.json({result: positions.length !== 0})
+
 })
 
 app.listen(port, ()=>{
