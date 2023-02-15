@@ -16,8 +16,4 @@ class ActivelyTrashing extends Drawable{
     this._ctx.stroke()
   }
 
-  set_pos(x, y){
-    this.x += x
-    this.y += y
-  }
 }

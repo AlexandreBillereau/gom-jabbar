@@ -14,6 +14,7 @@ class Drawable{
   }
 
   set_pos(x,y){
-    throw "this function need to be overwrite"
+    this.x += x
+    this.y += y
   }
 }
