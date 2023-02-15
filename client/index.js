@@ -8,7 +8,7 @@ function init(){
                             HEIGHT)
 
                         
-  canvas.draw()
+  canvas.init_drawable()
 
 }
 

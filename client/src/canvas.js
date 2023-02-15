@@ -7,19 +7,22 @@ class Canvas{
     this.drawable.push(new Origin(...ORIGIN_POS))
     this._ctx        = canvas.getContext("2d");
     this._background = new Background(...BACKGROUND_POS, this._ctx)
-    this.circle = new ActivelyTrashing(10,10, this._ctx)
     this.init_events(canvas)
+    this.init_drawable()
     
   }
 
   async draw(){
-    let background_image = this._background.create(BACKGROUND_IMAGE_PATH)
-    await this._background.draw(background_image)
+    await this._background.draw()
     this.drawable.forEach(obj => {
       obj.draw()
     });
+  }
 
-
+  init_drawable(){
+    this._background.create(BACKGROUND_IMAGE_PATH)
+    this.drawable.push(new MapUser(this._ctx))
+    this.draw()
   }
 
   init_events(canvas){
@@ -67,8 +70,10 @@ class Canvas{
     this.drawable.forEach(obj => {
       obj.set_pos(x,y)
     });
-
   }
+
+
+
 
 
 

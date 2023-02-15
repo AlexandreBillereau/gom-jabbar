@@ -14,7 +14,7 @@ class Background extends Drawable{
     this.image = image;
   }
 
-   draw(){
+  draw(){
     if(this._not_load){
       this._not_load = false  
       return new Promise((resolve) =>{
