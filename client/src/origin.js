@@ -6,8 +6,13 @@ class Origin extends Drawable{
 
   }
 
-  _draw(){
+  draw(){
 
+  }
+
+  set_pos(x,y){
+    this.x += x
+    this.y += y
   }
 
 }

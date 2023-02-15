@@ -4,11 +4,12 @@ class Canvas{
     canvas.width     = width
     canvas.height    = height
     this.drawable    = new Array()
+    this.drawable.push(new Origin(...ORIGIN_POS))
     this._ctx        = canvas.getContext("2d");
     this._background = new Background(...BACKGROUND_POS, this._ctx)
-    this.origin      = new Origin(...ORIGIN_POS)
     this.circle = new ActivelyTrashing(10,10, this._ctx)
     this.init_events(canvas)
+    
   }
 
   async draw(){
@@ -55,16 +56,18 @@ class Canvas{
 
     //test function
     canvas.onclick = (_with) => {
-      console.log("yata")
       this.drawable.push(new ActivelyTrashing(_with.offsetX, _with.offsetY, this._ctx))
       this.draw()
-
     }
 
   }
 
   set_pos(x,y) {//to-do : loop
     this._background.set_pos(x, y)
+    this.drawable.forEach(obj => {
+      obj.set_pos(x,y)
+    });
+
   }
 
 
